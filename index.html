@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow - To-Do List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">Task<span>Flow</span></h1>
+      <p class="tagline">Plan your work, set priorities, and finish what matters.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== Statistics ===== -->
+    <section class="stats" aria-label="Task statistics">
+      <div class="stat-card">
+        <span class="stat-number" id="statTotal">0</span>
+        <span class="stat-label">Total tasks</span>
+      </div>
+      <div class="stat-card stat-pending">
+        <span class="stat-number" id="statPending">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+      <div class="stat-card stat-completed">
+        <span class="stat-number" id="statCompleted">0</span>
+        <span class="stat-label">Completed</span>
+      </div>
+    </section>
+
+    <div class="layout">
+
+      <!-- ===== Add / Edit Task ===== -->
+      <section class="panel form-panel">
+        <h2 id="formTitle">Add a task</h2>
+
+        <form id="taskForm" novalidate>
+          <label for="taskTitle">Task</label>
+          <input type="text" id="taskTitle" placeholder="What needs to be done?" maxlength="100" autocomplete="off">
+          <p class="error" id="titleError" hidden>Please enter a task before adding.</p>
+
+          <div class="row">
+            <div>
+              <label for="taskDate">Due date</label>
+              <input type="date" id="taskDate">
+            </div>
+            <div>
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Add task</button>
+            <button type="button" class="btn btn-ghost" id="cancelBtn" hidden>Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ===== Task List ===== -->
+      <section class="panel list-panel">
+
+        <div class="toolbar">
+          <input type="search" id="searchInput" placeholder="Search tasks..." aria-label="Search tasks">
+
+          <select id="sortSelect" aria-label="Sort tasks">
+            <option value="recent">Sort: Recently added</option>
+            <option value="due">Sort: Due date</option>
+            <option value="priority">Sort: Priority</option>
+          </select>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <ul class="task-list" id="taskList"></ul>
+
+        <p class="empty" id="emptyMessage" hidden></p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
